@@ -6,13 +6,16 @@ var express = require('express'),
 
 Object.assign = require('object-assign')
 
-app.engine('html', require('ejs').renderFile);
+app.engine('html', require('ejs').renderFile)
 app.use(morgan('combined'))
 
 // 设置模板目录
 app.set('views', path.join(__dirname, 'views'))
 // 设置模板引擎为 ejs
 app.set('view engine', 'ejs')
+
+// 设置静态文件目录
+app.use(express.static(path.join(__dirname, 'static')))
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
